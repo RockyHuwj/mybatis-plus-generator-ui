@@ -259,7 +259,7 @@ public class MbpGenerator {
             entityBuilder.addTableFills(tableFills);
         }
         entityBuilder.idType(generatorConfig.getIdType());
-        entityBuilder.convertFileName(entityName -> entityName);
+        entityBuilder.convertFileName(nameConverter::entityNameConvert);
     }
 
     /**

@@ -11,19 +11,20 @@ public class TestApplication {
                 .password("root")
                 .port(8068)
                 .driverClassName("com.mysql.cj.jdbc.Driver")
-                .basePackage("com.github.davidfantasy.mybatisplus.generatorui.example")
+                .basePackage("com.infinity.api")
                 //数据库表前缀，生成entity名称时会去掉
-                .tablePrefix("t_")
+                //.tablePrefix("")
                 .nameConverter(new NameConverter() {
                     @Override
-                    public String serviceNameConvert(String entityName) {
-                        return entityName + "Service";
+                    public String entityNameConvert(String entityName) {
+                        return entityName + "Entity";
                     }
 
                     @Override
-                    public String controllerNameConvert(String entityName) {
-                        return entityName + "Action";
+                    public String mapperNameConvert(String entityName) {
+                        return entityName + "Repository";
                     }
+
                 })
                 .build();
         MybatisPlusToolsApplication.run(config);

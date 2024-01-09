@@ -28,13 +28,17 @@
 <% } %>
     </resultMap>
 <% } %>
+
 <% if(baseColumnList){ %>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
 <% for(field in table.commonFields){ %>
         ${field.columnName},
 <% } %>
-        ${table.fieldNames}
+        <%
+           var fieldName = @cn.hutool.core.util.StrUtil.replace(table.fieldNames, ", ", ",\r\n        t.");
+        %>
+        t.${fieldName}
     </sql>
 
 <% } %>

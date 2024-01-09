@@ -12,6 +12,10 @@ import static com.github.davidfantasy.mybatisplus.generatorui.dto.Constant.DOT_X
  */
 public interface NameConverter {
 
+    default String entityNameConvert(String entityName) {
+        return entityName;
+    }
+
     /**
      * 自定义Entity.java的类名称（文件名等于类名加固定后缀）
      *
