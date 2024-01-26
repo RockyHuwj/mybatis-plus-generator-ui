@@ -28,6 +28,8 @@ public class UserConfig {
 
     private ServiceImplStrategy serviceImplStrategy = new ServiceImplStrategy();
 
+    private TransferStrategy transferStrategy = new TransferStrategy();
+
     @JsonIgnore
     public OutputFileInfo getControllerInfo() {
         if (outputFiles == null) {
@@ -76,6 +78,14 @@ public class UserConfig {
         return outputFiles.stream().filter((f -> FILE_TYPE_SERVICE_IMPL.equals(f.getFileType()))).findFirst().get();
     }
 
+    @JsonIgnore
+    public OutputFileInfo getTransferInfo() {
+        if (outputFiles == null) {
+            return null;
+        }
+        return outputFiles.stream().filter((f -> FILE_TYPE_TRANSFER.equals(f.getFileType()))).findFirst().get();
+    }
+
     /**
      * 从另一个项目配置中合并可修改的配置项
      *
@@ -90,12 +100,14 @@ public class UserConfig {
         this.mapperXmlStrategy = sourceUserConfig.getMapperXmlStrategy();
         this.serviceStrategy = sourceUserConfig.getServiceStrategy();
         this.serviceImplStrategy = sourceUserConfig.getServiceImplStrategy();
+        this.transferStrategy = sourceUserConfig.getTransferStrategy();
         changeTplPath(sourceUserConfig.getControllerInfo(), this.getControllerInfo(), sourceProjectConfigPath, targetProjectConfigPath);
         changeTplPath(sourceUserConfig.getEntityInfo(), this.getEntityInfo(), sourceProjectConfigPath, targetProjectConfigPath);
         changeTplPath(sourceUserConfig.getMapperInfo(), this.getMapperInfo(), sourceProjectConfigPath, targetProjectConfigPath);
         changeTplPath(sourceUserConfig.getMapperXmlInfo(), this.getMapperXmlInfo(), sourceProjectConfigPath, targetProjectConfigPath);
         changeTplPath(sourceUserConfig.getServiceInfo(), this.getServiceInfo(), sourceProjectConfigPath, targetProjectConfigPath);
         changeTplPath(sourceUserConfig.getServiceImplInfo(), this.getServiceImplInfo(), sourceProjectConfigPath, targetProjectConfigPath);
+        changeTplPath(sourceUserConfig.getTransferInfo(), this.getTransferInfo(), sourceProjectConfigPath, targetProjectConfigPath);
     }
 
     private void changeTplPath(OutputFileInfo source, OutputFileInfo dist, String sourceProjectConfigPath, String targetProjectConfigPath) {

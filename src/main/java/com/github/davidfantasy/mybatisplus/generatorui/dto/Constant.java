@@ -30,4 +30,6 @@ public class Constant {
 
     public final static String FILE_TYPE_SERVICE_IMPL = "ServiceImpl";
 
+    public final static String FILE_TYPE_TRANSFER = "Transfer";
+
 }

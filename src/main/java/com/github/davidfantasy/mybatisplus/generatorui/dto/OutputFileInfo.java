@@ -54,6 +54,8 @@ public class OutputFileInfo {
             return RESOURCE_PREFIX_CLASSPATH + "codetpls/serviceImpl.java.btl";
         } else if (fileType.equals(FILE_TYPE_CONTROLLER)) {
             return RESOURCE_PREFIX_CLASSPATH + "codetpls/controller.java.btl";
+        }else if (fileType.equals(FILE_TYPE_TRANSFER)) {
+            return RESOURCE_PREFIX_CLASSPATH + "codetpls/transfer.java.btl";
         }
         return "";
     }

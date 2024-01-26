@@ -141,6 +141,10 @@ public class ProjectPathResolver {
         return PACKAGE_RESOURCES_PREFIX + "mapper";
     }
 
+    public String resolveTransferPackage() {
+        return PathUtil.joinPackage(basePackage, "service", "transfer");
+    }
+
     public synchronized void refreshBaseProjectPath(String rootPath) {
         if (baseProjectPath == null || !baseProjectPath.equals(rootPath)) {
             this.baseProjectPath = rootPath;

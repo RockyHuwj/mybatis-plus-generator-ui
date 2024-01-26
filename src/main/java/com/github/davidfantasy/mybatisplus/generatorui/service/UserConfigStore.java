@@ -200,6 +200,13 @@ public class UserConfigStore implements InitializingBean {
         controllerFile.setOutputLocation(pathResolver.resolveControllerPackage());
         controllerFile.setTemplateName(TemplateUtil.fileType2TemplateName(controllerFile.getFileType()));
         builtInFiles.add(controllerFile);
+        //Transfer
+        OutputFileInfo transferFile = new OutputFileInfo();
+        transferFile.setBuiltIn(true);
+        transferFile.setFileType(FILE_TYPE_TRANSFER);
+        transferFile.setOutputLocation(pathResolver.resolveTransferPackage());
+        transferFile.setTemplateName(TemplateUtil.fileType2TemplateName(transferFile.getFileType()));
+        builtInFiles.add(transferFile);
         return builtInFiles;
     }
 
