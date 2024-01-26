@@ -28,6 +28,6 @@ public class Constant {
 
     public final static String FILE_TYPE_SERVICE = "Service";
 
-    public final static String FILE_TYPE_SERVICEIMPL = "ServiceImpl";
+    public final static String FILE_TYPE_SERVICE_IMPL = "ServiceImpl";
 
 }

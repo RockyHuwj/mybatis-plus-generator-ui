@@ -50,7 +50,7 @@ public class OutputFileInfo {
             return RESOURCE_PREFIX_CLASSPATH + "codetpls/mapper.xml.btl";
         } else if (fileType.equals(FILE_TYPE_SERVICE)) {
             return RESOURCE_PREFIX_CLASSPATH + "codetpls/service.java.btl";
-        } else if (fileType.equals(FILE_TYPE_SERVICEIMPL)) {
+        } else if (fileType.equals(FILE_TYPE_SERVICE_IMPL)) {
             return RESOURCE_PREFIX_CLASSPATH + "codetpls/serviceImpl.java.btl";
         } else if (fileType.equals(FILE_TYPE_CONTROLLER)) {
             return RESOURCE_PREFIX_CLASSPATH + "codetpls/controller.java.btl";

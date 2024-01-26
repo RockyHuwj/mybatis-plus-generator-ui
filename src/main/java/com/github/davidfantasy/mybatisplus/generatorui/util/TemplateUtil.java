@@ -17,7 +17,7 @@ public class TemplateUtil {
                 || fileType.equalsIgnoreCase(FILE_TYPE_MAPPER)) {
             return fileType.toLowerCase() + ".btl";
         }
-        if (fileType.equals(FILE_TYPE_SERVICEIMPL)) {
+        if (fileType.equals(FILE_TYPE_SERVICE_IMPL)) {
             return "serviceImpl.java.btl";
         }
         return fileType.toLowerCase() + ".java.btl";

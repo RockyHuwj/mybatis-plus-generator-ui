@@ -117,7 +117,7 @@ public class MbpGenerator {
         builder.mapper(findTemplatePath(Constant.FILE_TYPE_MAPPER, userConfig));
         builder.xml(findTemplatePath(Constant.FILE_TYPE_MAPPER_XML, userConfig));
         builder.service(findTemplatePath(Constant.FILE_TYPE_SERVICE, userConfig));
-        builder.serviceImpl(findTemplatePath(Constant.FILE_TYPE_SERVICEIMPL, userConfig));
+        builder.serviceImpl(findTemplatePath(Constant.FILE_TYPE_SERVICE_IMPL, userConfig));
         builder.controller(findTemplatePath(Constant.FILE_TYPE_CONTROLLER, userConfig));
         if (!choosedFileTypes.contains(Constant.FILE_TYPE_ENTITY)) {
             builder.disable(TemplateType.ENTITY);
@@ -131,7 +131,7 @@ public class MbpGenerator {
         if (!choosedFileTypes.contains(Constant.FILE_TYPE_SERVICE)) {
             builder.disable(TemplateType.SERVICE);
         }
-        if (!choosedFileTypes.contains(Constant.FILE_TYPE_SERVICEIMPL)) {
+        if (!choosedFileTypes.contains(Constant.FILE_TYPE_SERVICE_IMPL)) {
             builder.disable(TemplateType.SERVICE_IMPL);
         }
         if (!choosedFileTypes.contains(Constant.FILE_TYPE_CONTROLLER)) {

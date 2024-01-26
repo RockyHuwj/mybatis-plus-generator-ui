@@ -73,7 +73,7 @@ public class UserConfig {
         if (outputFiles == null) {
             return null;
         }
-        return outputFiles.stream().filter((f -> FILE_TYPE_SERVICEIMPL.equals(f.getFileType()))).findFirst().get();
+        return outputFiles.stream().filter((f -> FILE_TYPE_SERVICE_IMPL.equals(f.getFileType()))).findFirst().get();
     }
 
     /**

@@ -189,7 +189,7 @@ public class UserConfigStore implements InitializingBean {
         //Service Impl
         OutputFileInfo serviceImplFile = new OutputFileInfo();
         serviceImplFile.setBuiltIn(true);
-        serviceImplFile.setFileType(FILE_TYPE_SERVICEIMPL);
+        serviceImplFile.setFileType(FILE_TYPE_SERVICE_IMPL);
         serviceImplFile.setOutputLocation(pathResolver.resolveServiceImplPackage());
         serviceImplFile.setTemplateName(TemplateUtil.fileType2TemplateName(serviceImplFile.getFileType()));
         builtInFiles.add(serviceImplFile);
