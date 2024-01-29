@@ -30,6 +30,8 @@ import org.springframework.util.StringUtils;
 import java.io.File;
 import java.util.*;
 
+import static com.github.davidfantasy.mybatisplus.generatorui.dto.Constant.FILE_TYPE_TRANSFER;
+
 @Component
 @Slf4j
 @AllArgsConstructor
@@ -69,7 +71,7 @@ public class MbpGenerator {
                     builder.dateType(generatorConfig.getDateType());
                     //指定所有生成文件的根目录
                     builder.outputDir(projectPathResolver.getSourcePath());
-                    builder.author(StringUtils.hasText(genSetting.getAuthor()) ? genSetting.getAuthor():   System.getProperty("user.name"));
+                    builder.author(StringUtils.hasText(genSetting.getAuthor()) ? genSetting.getAuthor() : System.getProperty("user.name"));
                     if (userConfig.getEntityStrategy().isSwagger2()) {
                         builder.enableSwagger();
                     }
@@ -79,6 +81,7 @@ public class MbpGenerator {
                     configTemplate(builder, genSetting.getChoosedOutputFiles(), userConfig);
                 }).injectionConfig(builder -> {
                     configInjection(builder, userConfig, genSetting);
+                    configTransfer(builder, userConfig);
                 }).strategyConfig(builder -> {
                     builder.addInclude(String.join(",", tables))
                             .disableSqlFilter()
@@ -320,6 +323,20 @@ public class MbpGenerator {
         controllerBuilder.convertFileName(nameConverter::controllerNameConvert);
     }
 
+    private void configTransfer(InjectionConfig.Builder builder, UserConfig userConfig) {
+        TransferStrategy transferStrategy = userConfig.getTransferStrategy();
+        NameConverter nameConverter = generatorConfig.getAvailableNameConverter();
+        for (OutputFileInfo outputFileInfo : userConfig.getOutputFiles()) {
+            if (outputFileInfo.getFileType().equals(FILE_TYPE_TRANSFER)) {
+                String transferPkg = PathUtil.joinPackage(userConfig.getTransferInfo().getOutputPackage());
+                CustomFile.Builder fileBuilder = new CustomFile.Builder();
+                fileBuilder.fileName(FILE_TYPE_TRANSFER + "&" + nameConverter.transferNameConvert(""));
+                fileBuilder.templatePath(findTemplatePath(FILE_TYPE_TRANSFER, userConfig));
+                fileBuilder.packageName(transferPkg);
+                builder.customFile(fileBuilder.build());
+            }
+        }
+    }
 
     private OutputFileInfo findFileConfigByType(String fileType, UserConfig userConfig) {
         for (OutputFileInfo outputFileInfo : userConfig.getOutputFiles()) {

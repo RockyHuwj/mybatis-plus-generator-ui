@@ -1,0 +1,23 @@
+package ${package.Service}.transfer;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+
+/**
+ * <p>
+ * ${table.comment!} 转换类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Mapper
+public interface ${transfer} {
+
+    ${transfer} INSTANCE = Mappers.getMapper(${transfer}.class);
+
+    String TO_DO = "TO_DO";
+
+    String TO_DTO = "TO_DTO";
+
+}

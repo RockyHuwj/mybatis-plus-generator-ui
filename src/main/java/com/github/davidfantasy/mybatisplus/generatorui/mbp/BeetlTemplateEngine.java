@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.generator.config.builder.ConfigBuilder;
 import com.baomidou.mybatisplus.generator.config.builder.CustomFile;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.engine.AbstractTemplateEngine;
+import com.github.davidfantasy.mybatisplus.generatorui.dto.Constant;
 import lombok.extern.slf4j.Slf4j;
 import org.beetl.core.Configuration;
 import org.beetl.core.GroupTemplate;
@@ -22,8 +23,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.davidfantasy.mybatisplus.generatorui.dto.Constant.RESOURCE_PREFIX_CLASSPATH;
-import static com.github.davidfantasy.mybatisplus.generatorui.dto.Constant.RESOURCE_PREFIX_FILE;
+import static com.github.davidfantasy.mybatisplus.generatorui.dto.Constant.*;
 
 /**
  * 对原模板引擎进行改造，使其支持file和classpath两类加载模式
@@ -96,7 +96,7 @@ public class BeetlTemplateEngine extends AbstractTemplateEngine {
 
     @Override
     protected void outputCustomFile(List<CustomFile> customFiles, TableInfo tableInfo, Map<String, Object> objectMap) {
-        String entityName = tableInfo.getEntityName();
+        String entityName = StrUtil.upperFirst(StrUtil.toCamelCase(tableInfo.getName().toLowerCase()));
         String parentPath = getPathInfo(OutputFile.parent);
         customFiles.forEach(file -> {
             String filePath = StrUtil.isNotBlank(file.getFilePath()) ? file.getFilePath() : parentPath;
@@ -104,9 +104,18 @@ public class BeetlTemplateEngine extends AbstractTemplateEngine {
                 filePath = filePath + File.separator + file.getPackageName();
                 filePath = filePath.replaceAll("\\.", "\\" + File.separator);
             }
-            String fileName = filePath + File.separator + nameConverter.customFileNameConvert(file.getFileName(), entityName);
+            int index = file.getFileName().indexOf("&");
+            String fileName = filePath + File.separator + nameConverter.customFileNameConvert(file.getFileName().substring(index + 1), entityName) + Constant.DOT_JAVA;
+            setObjectMap(file.getFileName().substring(0, index), entityName + file.getFileName().substring(index + 1), objectMap);
             outputFile(new File(fileName), objectMap, file.getTemplatePath(), file.isFileOverride());
         });
     }
 
+    public void setObjectMap(String fileType,String fileName, Map<String, Object> objectMap) {
+        switch (fileType) {
+            case FILE_TYPE_TRANSFER :
+                objectMap.put("transfer", fileName);
+            break;
+        }
+    }
 }

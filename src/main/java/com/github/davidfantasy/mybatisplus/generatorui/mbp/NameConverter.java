@@ -1,11 +1,8 @@
 package com.github.davidfantasy.mybatisplus.generatorui.mbp;
 
 import cn.hutool.core.util.StrUtil;
-import com.github.davidfantasy.mybatisplus.generatorui.dto.Constant;
 import com.google.common.base.Strings;
 
-import static com.github.davidfantasy.mybatisplus.generatorui.dto.Constant.DOT_JAVA;
-import static com.github.davidfantasy.mybatisplus.generatorui.dto.Constant.DOT_XML;
 
 /**
  * 自定义各类名称转换的规则
@@ -81,6 +78,10 @@ public interface NameConverter {
      */
     default String controllerNameConvert(String entityName) {
         return entityName + "Controller";
+    }
+
+    default String transferNameConvert(String entityName) {
+        return entityName + "Transfer";
     }
 
     /**
